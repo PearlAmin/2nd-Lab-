@@ -79,5 +79,5 @@ WHERE discountPct IN (SELECT discountPct
 -- So in a table containing employee's first name, last name, job, and age, someone could ask a check constraint to check for 
 -- select first name, from employees, where age >= 40. This check constraint would return all of the employees first names that were 40 years of age or older. 
 -- This would be an example of a good check constraint. A bad check constraint would compromise the integrity and validity of the data. This could happen if a user tried to 
--- ALTER, INSERT, OR DELETE certain data without being careful. For example, inserting inserting an age for a user with an unknown last name would compromise the validity of the data.
+-- UPDATE, INSERT, OR DELETE certain data without being careful. For example, inserting inserting an age for a user with an unknown last name would compromise the validity of the data.
 -- It is key for the data to remain as accurate as possible as of the highest quality. 
