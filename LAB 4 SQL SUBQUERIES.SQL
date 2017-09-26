@@ -1,4 +1,7 @@
-﻿-- QUESTION 1 -- 
+-- Pearl Amin
+--Lab 4 SQL Subqueries 
+
+-- QUESTION 1 -- 
 
 SELECT city
 FROM agents 
@@ -12,11 +15,11 @@ WHERE aid in (SELECT aid
 SELECT DISTINCT pid
 FROM orders 
 WHERE cid IN (SELECT cid
-				FROM customers 
-				WHERE city = 'Beijing')
-				AND aid IN (SELECT aid
-							FROM orders 
-							ORDER BY aid)
+		FROM orders 
+		WHERE cid in (SELECT cid 
+			      FROM customers 
+			      WHERE city = 'Beijing')) 
+					
 ORDER BY pid DESC
     ;
 
@@ -24,9 +27,9 @@ ORDER BY pid DESC
 
 SELECT cid, name
 FROM customers 
-WHERE cid IN (SELECT cid
-				FROM orders 
-				WHERE aid != 'a03')
+WHERE cid NOT IN (SELECT cid
+		  FROM orders 
+		  WHERE aid = 'a03')
    ;
 
 -- QUESTION 4 -- 
@@ -34,32 +37,33 @@ WHERE cid IN (SELECT cid
 SELECT cid
 FROM customers 
 WHERE cid IN (SELECT cid
-				FROM orders 
-				WHERE pid = 'p01'
-				AND cid IN (SELECT cid
-							FROM orders 
-							WHERE pid = 'p07'))
+	      FROM orders 
+  	      WHERE pid = 'p01'
+              AND cid IN (SELECT cid
+			  FROM orders 
+			  WHERE pid = 'p07'))
     ;
 
 -- QUESTION 5 --
 
-SELECT DISTINCT pid
+SELECT pid
 FROM products 
 WHERE pid NOT IN (SELECT pid
-					FROM orders 
-					WHERE aid IN ('a02', 'a03'))
-ORDER BY pid DESC
-    ;
-    
+		  FROM orders 
+		  WHERE CID IN (SELECT cid 
+				FROM customers 
+				WHERE aid in ('a02' , 'a03'))
+ORDER BY pid DESC) ; 
+
 -- QUESTION 6 -- 
 
 SELECT name, city, discountPct
 FROM customers 
 WHERE cid IN (SELECT cid
-				FROM orders 
-				WHERE aid IN (SELECT aid
-								FROM agents 
-								WHERE city IN ('Tokyo', 'New York')))
+	      FROM orders 
+	      WHERE aid IN (SELECT aid
+			    FROM agents 
+			    WHERE city IN ('Tokyo', 'New York')))
     ;
 
 -- QUESTION 7 -- 
@@ -67,8 +71,8 @@ WHERE cid IN (SELECT cid
 SELECT *
 FROM customers 
 WHERE discountPct IN (SELECT discountPct
-						FROM customers 
-						WHERE city IN ('Duluth', 'London'))
+		      FROM customers 
+		      WHERE city IN ('Duluth', 'London'))
 	;
 -- QUESTION 8 -- 
 
