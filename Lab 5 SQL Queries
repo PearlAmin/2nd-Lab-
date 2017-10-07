@@ -18,3 +18,8 @@ Having count (o.ordno) >= 1
 --having ordered one or more orders 
 ;
 
+--Question 6-- 
+Select c.name, a.name, c.city, a.city  
+From customers c full outer join agents a on a.city = c.city  
+Where a.city = c.city 
+;
